@@ -5,7 +5,7 @@ import Search from "./Search";
 
 const Header = () => {
   return(
-    <div className="flex justify-between p-4 z-40  bg-[#181A20]">
+    <div className="flex justify-between p-4 px-10 z-40 h-[10vh] bg-[#181A20] ">
       <Menu/>
       <Search/>
       <MenuUsuario/>
