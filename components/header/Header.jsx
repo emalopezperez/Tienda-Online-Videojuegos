@@ -1,16 +1,19 @@
+import { useState } from "react";
 import Menu from "./Menu";
-import MenuUsuario from "./MenuUsuario";
+import MenuUsuarioAuth from "./MenuUsuarioAuth";
 import Search from "./Search";
-
+import MenuUsuario from "./MenuUsuario";
 
 const Header = () => {
-  return(
-    <div className="flex justify-between p-4 px-10 z-40 h-[10vh] bg-[#181A20] ">
-      <Menu/>
-      <Search/>
-      <MenuUsuario/>
+  const [userAuth, setUserAuth] = useState(false);
+
+  return (
+    <div className="flex justify-between h-[10vh] bg-[#181A20] ">
+      <Menu />
+      <Search />
+      {userAuth ? <MenuUsuarioAuth /> : <MenuUsuario />}
     </div>
-  )
+  );
 };
 
 export default Header;

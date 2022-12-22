@@ -5,11 +5,12 @@ import { FaGithub, FaLinkedinIn } from "react-icons/fa";
 import { AiOutlineMail } from "react-icons/ai";
 import { BsFillPersonLinesFill } from "react-icons/bs";
 
+
 const Menu = () => {
   const [showMenu, setShowMenu] = useState(false);
 
   return (
-    <div className="flex items-center ">
+    <div className="flex items-center mx-2 md:mx-6 px-3">
       <button
         onClick={() => setShowMenu(!showMenu)}
         className="lg:hidden text-3xl text-white"
