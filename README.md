@@ -26,9 +26,9 @@
 
 ##  Descripcion
 
-    El proyecto es Tienda Online (E-Commerce) real de Videojuegos, el proyecto cuenta con sistema de Login y Registro de usuarios, donde el cliente podra registrarse
-    en la aplicacion para tener un perfil propio, en el mismo podra comprar sus juegos favoritos, para ello contamos con un propio sistema de
-    carrito integrando una pasarela de pago como es Stripe.
+    El proyecto es Tienda Online (E-Commerce) real de Videojuegos, el proyecto cuenta con sistema de Login y Registro
+    de usuarios, donde el cliente podra registrarse en la aplicacion para tener un perfil propio,
+    en el mismo podra comprar sus juegos favoritos, para ello contamos con un propio sistema de carrito integrando una pasarela de pago como es Stripe.
 
     -Uso de Context API para gestionar datos del usuario y carrito.
     -Uso de Context API para gestionar datos del usuario y carrito
