@@ -1,8 +1,12 @@
+import axios from "axios";
 import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import toast, { Toaster } from "react-hot-toast";
 
 const Register = ({ showLoginForm }) => {
+  const [datosUser, setDatosUser] = useState({});
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -30,13 +34,46 @@ const Register = ({ showLoginForm }) => {
         .required("Email requerido"),
     }),
 
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async(values) => {
+      await axios
+        .post("http://localhost:1337/api/auth/local/register", {
+          username: values.name,
+          lastname: values.lastname,
+          email: values.email,
+          code: "privateCode", // code contained in the reset link of step 3.
+          password: values.password,
+        })
+
+        .then((response) => {
+          console.log("Registrado");
+
+          showLoginForm();
+        })
+
+        .catch((error) => {
+          // Handle error.
+          console.log("usuario no registrado:", error.response);
+
+          toast.error("Error, vuelva a intentar", {
+            duration: 1000,
+            style: {
+              border: "1px solid #713200",
+              padding: "16px",
+              color: "#FF0000",
+            },
+            iconTheme: {
+              primary: "#FF0000",
+              secondary: "#FF0000",
+            },
+          });
+        });
     },
   });
 
   return (
     <div className="h-[100px] w-[300px] md:h-[200px] md:w-[350px] rounded-xl text-white">
+      {<Toaster position="top-right" reverseOrder={false} />}
+
       <div className=" mx-auto ">
         <h1 className="text-3xl text-black font-bold">Registrarse</h1>
 
@@ -108,16 +145,20 @@ const Register = ({ showLoginForm }) => {
               {formik.errors.password}
             </div>
           ) : null}
-          <button type="submit" className="bg-[#E58D27] text-black py-3  my-6 rounded font-bold">
+          <button
+            type="submit"
+            className="bg-[#E58D27] text-black py-3 my-6 rounded font-bold"
+          >
             Registrarse
           </button>
+
           <div className="flex justify-between items-center text-sm text-gray-600">
             <p>
               <input className="mr-2 cursor-pointer" type="checkbox" />
               Remember me
             </p>
           </div>
-          <p className="py-10 mb-2 ">
+          <p className="mt-6 mb-2 ">
             <span className="text-gray-600">Already subscribed?</span>{" "}
             <button onClick={showLoginForm} className="text-[#E58D27]">
               Iniciar sesion

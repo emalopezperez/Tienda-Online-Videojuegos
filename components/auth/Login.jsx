@@ -1,8 +1,10 @@
+import axios from "axios";
 import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import toast, { Toaster } from "react-hot-toast";
 
-const Login = ({ showRegisterForm }) => {
+const Login = ({ showRegisterForm , setSowModal}) => {
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -27,12 +29,39 @@ const Login = ({ showRegisterForm }) => {
     }),
 
     onSubmit: (values) => {
-      console.log(values);
+      axios
+        .post("http://localhost:1337/api/auth/local", {
+          identifier: values.email,
+          password: values.password,
+        })
+        .then((response) => {
+          console.log("usuario logeado");
+          console.log("User profile", response.data.user);
+          console.log("User token", response.data.jwt);
+
+          setSowModal()
+        })
+        .catch((error) => {
+          console.log("Email y contrasena incorrectas:", error.response);
+          toast.error("Email y contrasena incorrectas", {
+            duration: 2000,
+            style: {
+              border: "1px solid #713200",
+              padding: "16px",
+              color: "#FF0000",
+            },
+            iconTheme: {
+              primary: "#FF0000",
+              secondary: "#FF0000",
+            },
+          });
+        });
     },
   });
 
   return (
     <div className="h-[100px] w-[300px] md:h-[200px] md:w-[350px] rounded-xl text-white">
+      {<Toaster position="top-right" reverseOrder={false} />}
       <div className=" mx-auto ">
         <h1 className="text-3xl text-black font-bold">Login</h1>
 
@@ -97,10 +126,18 @@ const Login = ({ showRegisterForm }) => {
               Remember me
             </p>
           </div>
-          <p className="py-4 mb-2 ">
+          <p className="py-4 mt-5">
             <span className="text-gray-600">Already subscribed?</span>{" "}
             <button onClick={showRegisterForm} className="text-[#E58D27]">
               Registrarse
+            </button>
+          </p>
+          <p className=" ">
+            <button onClick={showRegisterForm} className="text-[#E58D27]">
+              <span className="text-[#E58D27]">
+                {" "}
+                ¿Has olvidaste tu contrasena?
+              </span>{" "}
             </button>
           </p>
         </form>

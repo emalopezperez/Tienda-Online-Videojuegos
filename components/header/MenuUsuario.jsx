@@ -17,7 +17,7 @@ const MenuUsuario = () => {
         Mi Cuenta
       </button>
       <BasicModal sowModal={sowModal} setSowModal={setSowModal}>
-        <Auth/>
+        <Auth setSowModal={setSowModal}/>
       </BasicModal>
     </>
   );
