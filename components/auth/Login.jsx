@@ -3,8 +3,13 @@ import { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import toast, { Toaster } from "react-hot-toast";
+import useAuth from "../../hooks/useAuth";
 
-const Login = ({ showRegisterForm , setSowModal}) => {
+const Login = ({ showRegisterForm, setSowModal }) => {
+  const { login, auth } = useAuth();
+
+  console.log(auth)
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -38,8 +43,10 @@ const Login = ({ showRegisterForm , setSowModal}) => {
           console.log("usuario logeado");
           console.log("User profile", response.data.user);
           console.log("User token", response.data.jwt);
+          
+          login(response.data.jwt)
 
-          setSowModal()
+          setSowModal();
         })
         .catch((error) => {
           console.log("Email y contrasena incorrectas:", error.response);
