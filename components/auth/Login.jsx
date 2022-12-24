@@ -8,8 +8,6 @@ import useAuth from "../../hooks/useAuth";
 const Login = ({ showRegisterForm, setSowModal }) => {
   const { login, auth } = useAuth();
 
-  console.log(auth)
-
   const formik = useFormik({
     initialValues: {
       name: "",
