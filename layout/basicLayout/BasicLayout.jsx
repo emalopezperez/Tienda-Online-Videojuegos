@@ -5,11 +5,11 @@ const BasicLayout = ({ children }) => {
   return (
     <>
       <Head>
-        <title>Games</title>
+        <title>Tienda onlinea de video juegos</title>
         <meta property="Emanuel Lopez" content="My page title" key="Tienda Onlinea" />
       </Head>
       <Header />
-      {children}
+      { children }
     </>
   );
 };

@@ -3,11 +3,12 @@ import BasicModal from "../modals/basicModal";
 import { RiUserShared2Line } from "react-icons/ri";
 import { FcBusinessman } from "react-icons/fc";
 import Auth from "../auth/Auth";
-import useAuth from "../../hooks/useAuth";
+
 
 const MenuUsuario = () => {
   const [sowModal, setSowModal] = useState(false);
-  const { logout, auth } = useAuth();
+  const [auth, setAuth]= useState(false)
+  const [logout, setLogout]= useState(false)
 
   const openModal = () => {
     setSowModal(true);
@@ -17,7 +18,7 @@ const MenuUsuario = () => {
     <>
       <button
         onClick={openModal}
-        className="flex items-center text-white gap-2 mx-3 md:mx-14  "
+        className="flex items-center gap-2 mx-3 text-white md:mx-14 "
       >
         {auth ? (
           <FcBusinessman className="mt-1" size={15} />
@@ -30,7 +31,7 @@ const MenuUsuario = () => {
       {auth ? (
         <button
           onClick={logout}
-          className="flex items-center text-white gap-2 mx-3 md:mx-14  "
+          className="flex items-center gap-2 mx-3 text-white md:mx-14 "
         >
           x
         </button>

@@ -20,7 +20,9 @@ export class Auth {
 
     try {
       const response = await fetch(url, options);
-      console.log("Registrado")
+      const data = await response.json()
+      console.log(data)
+      console.log("registrado")
 
     } catch (error) {
       console.error(error);
@@ -37,7 +39,6 @@ export class Auth {
       },
       body: JSON.stringify({
         identifier: values.email,
-        "username": values.name,
         code: "privateCode",
         password: values.password,
       }),

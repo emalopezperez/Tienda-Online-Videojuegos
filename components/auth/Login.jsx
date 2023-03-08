@@ -1,13 +1,14 @@
 import { useFormik } from "formik";
 import { Auth } from "../../pages/api/auth"
+import { useAuth } from "../../hooks/useAuth";
 import * as Yup from "yup";
 import toast, { Toaster } from "react-hot-toast";
-import useAuth from "../../hooks/useAuth";
 
 const authCtrl = new Auth()
 
 const Login = ({ showRegisterForm, setSowModal }) => {
-  const { login, auth } = useAuth();
+
+  const { } = useAuth()
 
   const formik = useFormik({
     initialValues: {
@@ -17,11 +18,6 @@ const Login = ({ showRegisterForm, setSowModal }) => {
     },
 
     validationSchema: Yup.object({
-      name: Yup.string()
-        .max(10, "Must be 15 characters or less")
-        .min(5, "faltan caracteres")
-        .required("Name requerido"),
-
       password: Yup.string()
         .max(20, "Must be 20 characters or less")
         .min(6, "faltan caracteres")
@@ -40,9 +36,7 @@ const Login = ({ showRegisterForm, setSowModal }) => {
         console.error(error);
       }
     },
-
   });
-
 
   return (
     <div className="h-[100px] w-[300px] md:h-[200px] md:w-[350px] rounded-xl text-white">
@@ -54,22 +48,7 @@ const Login = ({ showRegisterForm, setSowModal }) => {
           onSubmit={ formik.handleSubmit }
           className="flex flex-col w-full py-4"
         >
-          <input
-            className="p-3 my-2 bg-gray-700 rounded"
-            id="name"
-            type="text"
-            placeholder="Nombre"
-            name="name"
-            autoComplete="nombre"
-            onChange={ formik.handleChange }
-            onBlur={ formik.handleBlur }
-            value={ formik.values.name }
-          />
-          { formik.touched.name && formik.errors.name ? (
-            <div className="text-[#8d2d2c] font-bold text-sm">
-              { formik.errors.name }
-            </div>
-          ) : null }
+
           <input
             className="p-3 my-2 bg-gray-700 rounded"
             id="email"
